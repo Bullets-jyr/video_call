@@ -83,6 +83,19 @@ class _CamScreenState extends State<CamScreen> {
     );
   }
 
+  @override
+  void dispose() async {
+    if (engine != null) {
+      await engine!.leaveChannel(
+        options: LeaveChannelOptions(),
+      );
+
+      engine!.release();
+    }
+
+    super.dispose();
+  }
+
   renderMainView() {
     if (uid == null) {
       return Center(
